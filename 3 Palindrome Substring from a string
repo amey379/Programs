@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<string.h>
+
+int checkpal(char *t)
+{
+    int i,j;
+    for (i=0,j=strlen(t)-1;i<j;i++,j--)
+    {
+        if(t[i]!=t[j])
+            return 0;
+    }
+    return 1;
+}
+void cpystr(char* s,char *o,int i,int l)
+{
+	int j,n;
+	n=0;
+	for (j=i;j<=l;j++)
+		o[n++]=s[j];
+	o[n]='\0';
+
+}
+int main()
+{
+	int i,j,l;
+	char s[100],o[3][100],*t;
+	scanf("%s",s);
+	l=strlen(s);
+	for (i=0;i<l;i++)
+	{	
+		
+		cpystr(s,o[0],0,i);
+		//printf("\n1st %s %d",o[0],i);
+	
+	if(checkpal(o[0])==1)
+	{
+		for (j=0;j<l-i-1;j++)
+		{
+			cpystr(s,o[1],i+1,i+j+1);
+			//printf("\n2nd %s %d",o[1],j);
+			cpystr(s,o[2],i+j+2,l);
+			//printf("\n3nd %s %d",o[2],j);
+			if(checkpal(o[1])==1&&checkpal(o[2])==1)
+			{	printf("%s %s %s",o[0],o[1],o[2]);
+				return 0;
+			}
+		}
+	}
+	}
+	printf("IMPOSSIBLE");
+	return 0;
+}
